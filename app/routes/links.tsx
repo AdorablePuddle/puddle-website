@@ -12,12 +12,9 @@ import gmail_ico    from "~/assets/links/gmail.svg";
 import whatsapp_ico from "~/assets/links/whatsapp.svg";
 import youtube_ico  from "~/assets/links/youtube.svg";
 
-function Contact({text, link, icon, alt}: {text : string, link : string, icon : string, alt : string}) {
+function Contact({text, icon, alt}: {text : string, icon : string, alt : string}) {
     return (
-        <div className = "flex flex-col w-50 items-center p-3 border-[#b33c86] border-dotted border-3 hover:bg-[#f5a9b8]" onClick = {() => {
-            if (link === "") return;
-            window.location.href = link;
-        }}>
+        <div className = "flex flex-col w-50 items-center p-3 border-[#b33c86] border-dotted border-3 hover:bg-[#f5a9b8]">
             <img className = "object-scale-down" src = {icon} alt = {alt} />
             <p className = "caption">{text}</p>
         </div>
@@ -32,33 +29,34 @@ function Content() {
             </h3>
             <div className = "flex flex-col w-screen items-center">
                 <div className = "grid grid-cols-3 gap-4 w-fit items-center">
-                    <Contact 
-                        text = "@adorable_puddle"
-                        link = "https://discord.com/users/535335309769179136"
-                        icon = {discord_ico}
-                        alt  = "discord.svg"
-                    />
-                    <Contact 
-                        text = "AdorablePuddle"
-                        link = "https://github.com/AdorablePuddle"
-                        icon = {github_ico}
-                        alt  = "github.svg"
-                    />
-                    <Contact 
-                        text = "@ytamb4ever"
-                        link = "https://www.youtube.com/@ytamb4ever"
-                        icon = {youtube_ico}
-                        alt  = "discord.svg"
-                    />
+                    <a href = "https://discord.com/users/535335309769179136">
+                        <Contact 
+                            text = "@adorable_puddle"
+                            icon = {discord_ico}
+                            alt  = "discord.svg"
+                        />
+                    </a>
+                    <a href = "https://github.com/AdorablePuddle">
+                        <Contact 
+                            text = "AdorablePuddle"
+                            icon = {github_ico}
+                            alt  = "github.svg"
+                        />
+                    </a>
+                    <a href = "https://www.youtube.com/@ytamb4ever">
+                        <Contact 
+                            text = "@ytamb4ever"
+                            icon = {youtube_ico}
+                            alt  = "discord.svg"
+                        />
+                    </a>
                     <Contact 
                         text = "amberthequeer@gmail.com"
-                        link = ""
                         icon = {gmail_ico}
                         alt  = "gmail.svg"
                     />
                     <Contact 
                         text = "Adorablest-Puddle"
-                        link = ""
                         icon = {whatsapp_ico}
                         alt  = "whatsapp.svg"
                     />

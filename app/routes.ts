@@ -4,5 +4,10 @@ export default [
 	index(         "routes/home.tsx"),
 	route("about", "routes/about.tsx"),
 	route("links", "routes/links.tsx"),
-	route("apps" , "routes/apps.tsx" ),
+	// Apps specific stuff
+
+	route("apps" , "routes/apps.tsx", [
+		index("routes/apps.tsx"),
+		route("koharu-diary", "routes/apps/koharu/koharu-diary.tsx"),
+	]),	
 ] satisfies RouteConfig;
