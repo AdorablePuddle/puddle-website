@@ -4,7 +4,7 @@ import Favicon from "react-favicon";
 import Header from "~/pages/header";
 import Router from "~/pages/router";
 
-import webicon from "public/icon.png";
+import webicon from "/icon.png";
 
 function Content() {
 	return (

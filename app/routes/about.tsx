@@ -7,7 +7,7 @@ import Router from "~/pages/router";
 import amby_pfp from "~/assets/amby-avatar.png";
 import heart from "~/assets/heart.png";
 import art from "~/assets/art.jpg";
-import webicon from "public/icon.png";
+import webicon from "/icon.png";
 
 function ExternalLink({text, link} : {text : string, link : string}) {
     return <a href = {link} className = "paragraph-link">{text}</a>

@@ -5,7 +5,7 @@ import Header from "~/pages/header";
 import Router from "~/pages/router";
 
 import mizu_smug from "~/assets/mizu_smug.png";
-import webicon from "public/icon.png";
+import webicon from "/icon.png";
 
 function YellingAboutBirthday() {
 	const TODAY = new Date();
