@@ -62,6 +62,15 @@ function Content() {
                     />
                 </div>
             </div>
+            <h3 className = "paragraph-title">
+                Extra Credits:
+            </h3>
+            <p className = "paragraph">
+                @wiineko : Providing the magnificent Koharu-petting gif on the header.
+            </p>
+            <p className = "paragraph">
+                Picrew : Providing my image used in the About Me! section.
+            </p>
 		</div>
 	);
 }

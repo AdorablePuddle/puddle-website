@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Caveat+Brush&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Delius&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Vibur&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -9,14 +10,19 @@
 	--font-caveat: "Caveat Brush";
 	--font-delius: "Delius";
 	--font-noto-sans: "Noto Sans";
+	--font-koharu-handwriting: "Vibur";
+
+	--color-trans-pink: #f5a9b8;
+	--color-trans-blue: #5bcefA;
 }
 
 @layer components {
+	/* Main Page */
 	.blog-content {
 		@apply overflow-y-auto w-full h-full p-2 border-5 border-double border-[#b33c86] bg-[#fad1d1];
 	}
 	.paragraph {
-		@apply py-2 text-[#190e4f] indent-8 font-noto-sans text-lg;
+		@apply py-2 text-[#190e4f] indent-16 font-noto-sans text-lg;
 	}
 	.caption {
 		@apply py-2 text-[#190e4f] text-center font-noto-sans text-sm;
@@ -25,8 +31,10 @@
 		@apply py-2 text-[#190e4f] indent-8 font-noto-sans text-xl font-bold;
 	}
 	.paragraph-link {
-		@apply py-2 text-purple-500 indent-8 font-noto-sans text-lg italic;
+		@apply py-2 text-purple-500 font-noto-sans text-lg italic;
 	}
+	
+	/* Koharu's Diary */
 }
 
 html,
