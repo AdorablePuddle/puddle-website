@@ -14,7 +14,7 @@ import youtube_ico  from "~/assets/links/youtube.svg";
 
 function Contact({text, icon, alt}: {text : string, icon : string, alt : string}) {
     return (
-        <div className = "flex flex-col w-50 items-center p-3 border-[#b33c86] border-dotted border-3 hover:bg-[#f5a9b8]">
+        <div className = "flex flex-col w-50 items-center p-3 border-[#b33c86] border-dotted border-3 hover:bg-trans-pink">
             <img className = "object-scale-down" src = {icon} alt = {alt} />
             <p className = "caption">{text}</p>
         </div>
@@ -28,7 +28,7 @@ function Content() {
                 Contact Information:
             </h3>
             <div className = "flex flex-col w-screen items-center">
-                <div className = "grid grid-cols-3 gap-4 w-fit items-center">
+                <div className = "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 w-fit items-center">
                     <a href = "https://discord.com/users/535335309769179136">
                         <Contact 
                             text = "@adorable_puddle"
