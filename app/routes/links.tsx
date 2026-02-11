@@ -27,7 +27,7 @@ function Content() {
             <h3 className = "paragraph-title">
                 Contact Information:
             </h3>
-            <div className = "flex flex-col w-screen items-center">
+            <div className = "flex flex-col items-center">
                 <div className = "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 w-fit items-center">
                     <a href = "https://discord.com/users/535335309769179136">
                         <Contact 

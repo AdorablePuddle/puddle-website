@@ -91,6 +91,9 @@ export default function About() {
     useEffect(
         () => {
             document.title = "About Me!";
+            if (Math.random() > 0.75) {
+                document.title = "KEY: bweh";
+            }
         }
     )
     
