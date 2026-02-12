@@ -8,6 +8,9 @@ export default [
 
 	route("apps" , "routes/apps/layout.tsx", [
 		index("routes/apps/apps.tsx"),
-		route("koharu-diary", "routes/apps/koharu/koharu-diary.tsx")
+		route("koharu", "routes/apps/koharu/layout.tsx", [
+			index("routes/apps/koharu/koharu-diary.tsx")
+		]),
+		route("exedra-calc", "routes/apps/exedra-damage-calculator.tsx"),
 	]),
 ] satisfies RouteConfig;

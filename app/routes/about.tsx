@@ -25,7 +25,7 @@ function Content() {
 
 	return (
 		<article className = "blog-content">
-            <img className = "float-right p-3 size-60" src = {amby_pfp} alt = "A cute puddle of girl."/>
+            <img className = "float-right p-3 size-60" src = {amby_pfp} alt = "A girl with long black hair. There is a flower crown adorning her head. She has heterochromia with one black eye and one pink. She wears a school-uniform with white cardigan. She is displaying a cat-like smile at the viewer."/>
             <h3 className = "paragraph-title">
                 What I am:
             </h3>
@@ -45,7 +45,7 @@ function Content() {
                 Despite computer science being my interest, I acknowledge that I still don't know a lot of frameworks and skills. I am proficient with: <ExternalLink text = "C" link = "https://en.wikipedia.org/wiki/C_(programming_language)" />, <ExternalLink text = "C++" link = "https://en.wikipedia.org/wiki/C%2B%2B" />, <ExternalLink text = "Python" link = "https://en.wikipedia.org/wiki/Python_(programming_language)" />, <ExternalLink text = "Java" link = "https://en.wikipedia.org/wiki/Java_(programming_language)" />, <ExternalLink text = "C#" link = "https://en.wikipedia.org/wiki/C_Sharp_(programming_language)" />, <ExternalLink text = "Arduino" link = "https://www.arduino.cc" /> and <ExternalLink text = "Scratch" link = "https://scratch.mit.edu" />. I'm also learning more about new things like <ExternalLink text = "React.js" link = "https://react.dev" />, <ExternalLink text = "Django" link = "https://www.djangoproject.com" />, <ExternalLink text = "Pygame" link = "https://www.pygame.org/news" />, <ExternalLink text = "Docker" link = "Docker.io" />, <ExternalLink text = "Fedora Linux" link = "https://www.fedoraproject.org" />, <ExternalLink text = "Godot" link = "https://godotengine.org" /> and more. I am open to learn more about new and interesting frameworks in the future.
             </p>
             <div className = "flex flex-col float-left p-3">
-                <img className = "w-140" src = {heart} alt = "19.75 hours of suffering.png" />
+                <img className = "w-140" src = {heart} alt = "Screenshot of Starfruit Supernova, completed in 19.75 hours." />
                 <p className = "caption">
                     Starfruit Supernova - one of the hardest Celeste Map I had ever beaten.
                 </p>
@@ -60,7 +60,7 @@ function Content() {
                 I play a lot of video games. My favourite genre usually is platformer, rhythm games, run and gun, hack and slash, puzzles and metroidvania. However, the games I play can vary greatly. My most liked game of all time is Celeste, which I had spent a total of more than 1000 hours in total, and I can play at a high level (but not good enough for Hardlists, sadly). I also know a lot about the game and its various movement mechanics and I can yap for a long while about Celeste and the maps I like and play. I also spend an ungodly amount of time in various rhythm games, from hallway scrollers like Arcaea, Project Sekai and Chunithm to exotic things like Maimai and Phigros, most of these games I can play at a competent level. Besides my main games, I have a number of other games that shuffles in and out of my interest pools over time such as: Hollow Knight, Silksong, Final Fantasy 14, Pokemon (and Competitive Pokemon), Puyo Puyo, Minecraft, Crosscode, Balatro, Touhou Project, Stardew Valley, Satisfactory, Factorio or recently 100% Orange Juice.
             </p>
             <div className = "flex flex-col float-right p-3">
-                <img className = "w-90" src = {art} alt = "I could never reach this height again.jpg" />
+                <img className = "w-90" src = {art} alt = "Image of an anime girl illustration." />
                 <p className = "caption">
                     One of my little art piece that I did in 2024.
                 </p>

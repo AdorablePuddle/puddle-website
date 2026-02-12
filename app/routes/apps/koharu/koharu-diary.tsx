@@ -111,7 +111,7 @@ let ENTRIES = [
             <p>
                 We started by thrifting out a small clothing shop. This was the first time I have ever stepped into the women clothing aisle. Every time I tried to before, I was stopped by mom, pulling me back to get me an another t-shirt. The dresses here were so colorful and varied. While she was scanning the rackets, figuring out what to try out first, I looked around and found a pretty dress. It is creamy pruple, reminding me of the sweet potato ice-cream cones I loved when I was young. The dress's had dropped shoulder, suspended by strings. It was so pretty. 
             </p>
-            <img className = "float-right m-2 w-1/2" src = {koharu_dress} alt = "it's so cute..." />
+            <img className = "float-right m-2 w-1/2" src = {koharu_dress} alt = "" />
             <p>
                 I was going to put it back on to the rackets, but she creeped up behind me and told me to try it on. I was anxious at first, I didn't know that I was allowed to do this before. After a while inside the testing room, I looked at myself in the dress. I felt that warmth in my chest and face as I looked at myself. I twirled in place. I have never felt like this trying on clothes before.
             </p>

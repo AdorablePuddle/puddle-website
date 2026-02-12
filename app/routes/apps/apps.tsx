@@ -1,7 +1,7 @@
 import { useEffect, useId, useState } from "react";
-import { useNavigate } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 
-import Favicon from "react-favicon";
+    import Favicon from "react-favicon";
 
 import Header from "~/pages/header";
 import Router from "~/pages/router";
@@ -10,7 +10,10 @@ import webicon from "/icon.png";
 import takao from "~/assets/takao.png";
 import poppo from "~/assets/poppo.jpeg";
 
-function Content() {
+import lockedApp from "~/assets/apps/locked.png";
+import exedra from "~/assets/apps/exedra.png";
+
+function Seeker() {
     const navigator = useNavigate();
     const seekerId = useId();
     const [seeker, setSeeker] = useState("");
@@ -27,7 +30,13 @@ function Content() {
             setSeekerResponse("If you seek the tormented girl's journal, you need to specify that her diary is what you're looking for.");
         },
         "koharu's diary" : () => {
-            navigator("koharu-diary");
+            navigator("koharu");
+        },
+        "koharu-diary" : () => {
+            navigator("koharu");
+        },
+        "exedra-calc" : () => {
+            navigator("exedra-calc");
         },
         "secret" : () => {
             alert("A secret is revealed!");
@@ -154,41 +163,109 @@ function Content() {
         setSeeker("");
     }
 
+    return (
+        <form 
+            className = "flex flex-col gap-1 mb-3 items-center"
+            onSubmit = {seekerHandle}
+        >
+            <label className = "paragraph-title indent-0" htmlFor = {seekerId}>
+                The Seeker
+            </label>
+            <input 
+                className = "font-normal border-3 border-black bg-white p-1 w-full text-center"
+                id = {seekerId}
+                type = "text"
+                name = "seeker"
+                value = {seeker}
+                autoComplete = "off"
+                onChange = {(event) => {
+                    setSeeker(event.target.value);
+                }}
+            />
+            <img 
+                className = {(seekerImageResponse === "")? "hidden" : "h-25"}
+                src = {seekerImageResponse}
+                alt = "We must rise up against the screenreaders! Down with the Aristocrats!"
+            />
+            <p 
+                style = {{
+                    color : seekerColor
+                }}
+                className = {(seekerImageResponse === "")? "py-2 text-paragraph-primary font-noto-sans text-sm font-normal h-15 md:h-10 text-center" : "hidden"}
+            >
+                {seekerResponse}
+            </p>
+        </form>
+    );
+
+}
+
+function Application(
+    {name, desc, icon, iconAlt, routePath} : 
+    {name : string, desc : string, icon : string, iconAlt : string, routePath : string}
+) {
+    if (routePath === "") {
+        return (
+            <section className = "flex flex-col xl:flex-row items-center p-3 gap-3 border-2 rounded-lg transition duration-150 ease-in-out border-dotted scale-100 border-white bg-white/0 hover:scale-102 hover:border-trans-blue hover:bg-white/25 cursor-not-allowed">
+                <img 
+                    className = "h-50 m-3 rounded-lg"
+                    src = {icon}
+                    alt = {iconAlt}
+                />
+                <h3 className = "font-noto-sans font-bold text-paragraph-primary text-center xl:text-left text-2xl">
+                    {name}
+                </h3>
+                <p className = "font-noto-sans font text-paragraph-primary text-center xl:text-left text-lg">
+                    {desc}
+                </p>
+            </section>
+        );
+    } else {
+        return (
+            <NavLink to = {routePath} className = "flex flex-col xl:flex-row items-center p-3 gap-3 border-2 rounded-lg transition duration-150 ease-in-out border-dotted scale-100 border-white bg-white/0 hover:scale-102 hover:border-trans-blue hover:bg-white/25">
+                <img 
+                    className = "h-50 m-3 rounded-lg"
+                    src = {icon}
+                    alt = {iconAlt}
+                />
+                <h3 className = "font-noto-sans font-bold text-paragraph-primary text-center xl:text-left text-2xl">
+                    {name}
+                </h3>
+                <p className = "font-noto-sans font text-paragraph-primary text-center xl:text-left text-lg">
+                    {desc}
+                </p>
+            </NavLink>
+        );
+    }
+}
+
+function UnavailableApplicaton() {
+    return <Application name = "Unavailable" desc = "This application is unavailable" icon = {lockedApp} iconAlt = "" routePath = ""/>;
+}
+
+function ApplicationList() {
+    return (
+        <div className = "grid grid-cols-1 md:grid-cols-2 gap-5 p-5">
+            <Application 
+                name = "Magia Exedra's Damage Calculator"
+                desc = "Damage calculator for the mobile / PC gacha game Magia Exedra. (Seeker code: exedra-calc)"
+                icon = {exedra}
+                iconAlt = "Magia Exedra's Icon"
+                routePath = "/apps/exedra-calc"
+            />
+            <UnavailableApplicaton />
+            <UnavailableApplicaton />
+            <UnavailableApplicaton />
+        </div>
+    );
+}
+
+function Content() {
 	return (
 		<div className = "blog-content">
-            <form 
-                className = "flex flex-col gap-1 mb-3 items-center"
-                onSubmit = {seekerHandle}
-            >
-                <label className = "paragraph-title indent-0" htmlFor = {seekerId}>
-                    The Seeker
-                </label>
-                <input 
-                    className = "font-normal border-3 border-black bg-white p-1 w-full text-center"
-                    id = {seekerId}
-                    type = "text"
-                    name = "seeker"
-                    value = {seeker}
-                    autoComplete = "off"
-                    onChange = {(event) => {
-                        setSeeker(event.target.value);
-                    }}
-                />
-                <img 
-                    className = {(seekerImageResponse === "")? "hidden" : "h-25"}
-                    src = {seekerImageResponse}
-                    alt = "We must rise up against the screenreaders! Down with the Aristocrats!"
-                />
-                <p 
-                    style = {{
-                        color : seekerColor
-                    }}
-                    className = {(seekerImageResponse === "")? "seeker" : "hidden"}
-                >
-                    {seekerResponse}
-                </p>
-            </form>
+            <Seeker />
             <hr />
+            <ApplicationList />
 		</div>
 	);
 }

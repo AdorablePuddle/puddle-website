@@ -21,7 +21,7 @@ function YellingAboutBirthday() {
 function Content() {
 	return (
 		<div className = "blog-content">
-			<img className = "float-right p-5" src = {mizu_smug} alt = "neko-heart.webp"/>
+			<img className = "float-right p-5" src = {mizu_smug} alt = "A girl with pink hair, red bow and clear pink eyes, tied into a side ponytail. She displays a smug expression at the viewer."/>
 			<p className = "paragraph">
 				Welcome to Puddle's Website!
 			</p>
@@ -40,15 +40,17 @@ function Content() {
 			<h3 className = "paragraph-title">
 				Most Recent Hyperfixations (Please ask me about them):
 			</h3>
-			<p className = "paragraph">
-				- Minecraft
-			</p>
-			<p className = "paragraph">
-				- Maimai
-			</p>
-			<p className = "paragraph">
-				- 100% Orange Juice
-			</p>
+			<ol>
+				<li className = "paragraph">
+					- Minecraft
+				</li>
+				<li className = "paragraph">
+					- Maimai
+				</li>
+				<li className = "paragraph">
+					- 100% Orange Juice
+				</li>
+			</ol>
 			<YellingAboutBirthday />
 		</div>
 	);
