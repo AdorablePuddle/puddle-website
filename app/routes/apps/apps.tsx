@@ -7,106 +7,20 @@ import Header from "~/pages/header";
 import Router from "~/pages/router";
 
 import webicon from "/icon.png";
+import takao from "~/assets/takao.png";
+import poppo from "~/assets/poppo.jpeg";
 
 function Content() {
-    /**
-     * If you are reading this, I presume you're trying to read the source. Come on. Respect the game. Find the secrets yourself.
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     */
     const navigator = useNavigate();
     const seekerId = useId();
     const [seeker, setSeeker] = useState("");
     const [seekerColor, setSeekerColor] = useState("#190e4f");
     const [seekerResponse, setSeekerResponse] = useState("");
+    const [seekerImageResponse, setSeekerImageResponse] = useState("");
 
     const responseList = {
         "" : () => {
-            setSeekerResponse("");
+            setSeekerResponse("Speak up, bottom.");
         },
         "koharu" : () => {
             setSeekerColor("#fad1d1");
@@ -123,26 +37,37 @@ function Content() {
             setSeekerResponse("");
         },
         "hint" : () => {
-            const hintCount = 5;
+            const hintCount = 7;
             const hintChosen = Math.round(Math.random() * hintCount);
             const hints = [
                 "Scrambled text? Sometimes it might be helpful to treat it as some sort of cipher.",
                 "Consider reloading pages.",
-                `I'm about ${Math.round(Math.random() * 100)}% sure you don't tend to read the page title.`,
+                `I'm about ${Math.round(Math.random() * 100)}% sure you don't tend to read the page title. Read it more often.`,
                 "On her birthday, remember to check this page.",
                 "Try asking about inside jokes.",
+                "Funny numbers are funny, I think.",
+                "Poppoh! Pokyukyukyukyu!",
             ];
 
             setSeekerResponse(hints[hintChosen]);
         },
+        "21" : () => {
+            setSeekerResponse("10 + 9");
+        },
+        "42" : () => {
+            setSeekerResponse("The answer to the ultimate question of life, the universe, and everything.");
+        },
         "67" : () => {
             setSeekerResponse("Please shut the fuck up.");
         },
-        "ribbon" : () => {
-            setSeekerResponse("Buddy, this isn't the diary. (Besides, that ARG was done a long time ago).");
-        },
         "69" : () => {
             setSeekerResponse("Nice :D");
+        },
+        "420" : () => {
+            window.open("https://www.youtube.com/watch?v=QZXc39hT8t4");
+        },
+        "ribbon" : () => {
+            setSeekerResponse("Buddy, this isn't the diary. (Besides, that ARG was done a long time ago).");
         },
         "lumby shippers" : () => {
             setSeekerResponse("There is prolly none of them out there.");
@@ -163,7 +88,8 @@ function Content() {
             setSeekerResponse("Bweh! :3");
         },
         "define whore" : () => {
-            window.open("https://discord.com/users/655079886289109002");
+            setSeekerResponse("");
+            setSeekerImageResponse(takao);
         },
         "kink" : () => {
             setSeekerResponse("Why are you asking me this? Be brave and go ask the creator.");
@@ -174,11 +100,52 @@ function Content() {
         "adhd" : () => {
             setSeekerResponse("Absolutely.");
         },
+        "magia" : () => {
+            setSeekerResponse("⋆ ˚｡⋆୨୧˚ Fucking Dysphoria Magic ˚୨୧⋆｡˚ ⋆");
+        },
+        "literary genius" : () => {
+            setSeekerResponse("fjkhadfojhasfo");
+        },
+        "i'm home" : () => {
+            setSeekerResponse("Did you mean: I'm hoe");
+        },
+        "i'm hoe" : () => {
+            setSeekerResponse("Yes you are.");
+        },
+        "nagisa" : () => {
+            setSeekerResponse("One day, Neko, one day.");
+        },
+        "poppo" : () => {
+            setSeekerResponse("");
+            setSeekerImageResponse(poppo);
+        },
+        "wiineko" : () => {
+            setSeekerResponse("Andrew Tate femboy came over you");
+        },
+        "lumen" : () => {
+            setSeekerResponse("Mum dad why did you make me autistic");
+        },
+        "astro" : () => {
+            setSeekerResponse("Anyway, I'm gonna play with my selfie stick");
+        },
+        "ura" : () => {
+            setSeekerResponse("And who cares if I forcefem my idols?");
+        },
+        "krunk" : () => {
+            setSeekerResponse("It's rough, it gets everywhere, and I like it that way.");
+        },
+        "haya" : () => {
+            setSeekerResponse("i played LIMBUS COMPANY and all i gotta say is if you give me 10 minutes alone with this man in a room one of us is walking out pregnant and it ain't gonna be me");            
+        },
+        "amby" : () => {
+            setSeekerResponse("me blowing Clorine Gas into your room");
+        },
     };
 
     function seekerHandle(event : React.SyntheticEvent<HTMLFormElement>) {
         event.preventDefault();
         setSeekerColor("#190e4f");
+        setSeekerImageResponse("");
         if (seeker.toLowerCase() in responseList) {
             responseList[seeker.toLowerCase() as keyof typeof responseList]();
         } else {
@@ -207,11 +174,16 @@ function Content() {
                         setSeeker(event.target.value);
                     }}
                 />
+                <img 
+                    className = {(seekerImageResponse === "")? "hidden" : "h-25"}
+                    src = {seekerImageResponse}
+                    alt = "We must rise up against the screenreaders! Down with the Aristocrats!"
+                />
                 <p 
                     style = {{
                         color : seekerColor
                     }}
-                    className = "seeker"
+                    className = {(seekerImageResponse === "")? "seeker" : "hidden"}
                 >
                     {seekerResponse}
                 </p>
