@@ -12,14 +12,16 @@
 	--font-caveat: "Caveat Brush";
 	--font-delius: "Delius";
 	--font-noto-sans: "Noto Sans";
-	--font-koharu-title: "Vibur";
-	--font-koharu-handwriting: "Meow Script";
 	--font-story-script: "Story Script";
 
 	--color-trans-pink: #f5a9b8;
 	--color-trans-blue: #5bcefA;
 
 	--color-paragraph-primary: #190e4f;
+
+	/* Koharu's Diary */
+	--font-koharu-title: "Vibur";
+	--font-koharu-handwriting: "Meow Script";	
 }
 
 @layer components {
@@ -44,9 +46,22 @@
 	.diary-entry {
 		@apply indent-8 font-koharu-handwriting w-full text-2xl transition duration-300 ease-in-out border-5 border-dotted border-trans-blue scale-100 md:scale-98 hover:border-trans-pink hover:scale-100 p-3
 	}
-
 	.diary-title {
 		@apply font-extrabold
+	}
+
+	/* Exedra Damage Calculator */
+	.section {
+		@apply flex flex-col p-3 m-3 gap-3 rounded-xl border-trans-blue border-4 border-solid
+	}
+	.section-title {
+		@apply flex flex-row justify-center items-center gap-10 font-noto-sans text-2xl font-bold
+	}
+	.section-icon {
+		@apply hidden md:block size-5 
+	}
+	.section-content {
+		@apply font-noto-sans text-xl font-normal
 	}
 }
 

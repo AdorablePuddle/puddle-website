@@ -20,6 +20,7 @@ function Seeker() {
     const [seekerColor, setSeekerColor] = useState("#190e4f");
     const [seekerResponse, setSeekerResponse] = useState("");
     const [seekerImageResponse, setSeekerImageResponse] = useState("");
+    const [seekerImageAlt, setSeekerImageAlt] = useState("");
 
     const responseList = {
         "" : () => {
@@ -99,6 +100,7 @@ function Seeker() {
         "define whore" : () => {
             setSeekerResponse("");
             setSeekerImageResponse(takao);
+            setSeekerImageAlt("Image of an oc that represents @wiineko - the artist who provided the Koharu-petting image on the header and various other art resources for the website.");
         },
         "kink" : () => {
             setSeekerResponse("Why are you asking me this? Be brave and go ask the creator.");
@@ -127,6 +129,7 @@ function Seeker() {
         "poppo" : () => {
             setSeekerResponse("");
             setSeekerImageResponse(poppo);
+            setSeekerImageAlt("The image shows a close-up image of Marie Poppo, a character from the game 100% Orange Juice, known for speaking in baby gibberish.");
         },
         "wiineko" : () => {
             setSeekerResponse("Andrew Tate femboy came over you");
@@ -155,6 +158,7 @@ function Seeker() {
         event.preventDefault();
         setSeekerColor("#190e4f");
         setSeekerImageResponse("");
+        setSeekerImageAlt("");
         if (seeker.toLowerCase() in responseList) {
             responseList[seeker.toLowerCase() as keyof typeof responseList]();
         } else {
@@ -185,7 +189,8 @@ function Seeker() {
             <img 
                 className = {(seekerImageResponse === "")? "hidden" : "h-25"}
                 src = {seekerImageResponse}
-                alt = "We must rise up against the screenreaders! Down with the Aristocrats!"
+                alt = {seekerImageAlt}
+                aria-hidden = "true"
             />
             <p 
                 style = {{
@@ -243,15 +248,16 @@ function UnavailableApplicaton() {
     return <Application name = "Unavailable" desc = "This application is unavailable" icon = {lockedApp} iconAlt = "" routePath = ""/>;
 }
 
+// Seeker code: exedra-calc
 function ApplicationList() {
     return (
         <div className = "grid grid-cols-1 md:grid-cols-2 gap-5 p-5">
             <Application 
                 name = "Magia Exedra's Damage Calculator"
-                desc = "Damage calculator for the mobile / PC gacha game Magia Exedra. (Seeker code: exedra-calc)"
+                desc = "Damage calculator for the mobile / PC gacha game Magia Exedra. (Currently under renovation)"
                 icon = {exedra}
                 iconAlt = "Magia Exedra's Icon"
-                routePath = "/apps/exedra-calc"
+                routePath = ""
             />
             <UnavailableApplicaton />
             <UnavailableApplicaton />

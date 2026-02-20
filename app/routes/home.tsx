@@ -50,6 +50,9 @@ function Content() {
 				<li className = "paragraph">
 					- 100% Orange Juice
 				</li>
+				<li className = "paragraph">
+					- Star Detective Pretty Cure
+				</li>
 			</ol>
 			<YellingAboutBirthday />
 		</div>
