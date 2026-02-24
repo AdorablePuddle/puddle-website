@@ -5,7 +5,7 @@ function Icon() {
         <img
             className = "w-13 h-13 cursor-grab"
             src = {kohar}
-            alt = "The image of an anime girl being patted."
+            aria-hidden = "true"
         />
     )
 }

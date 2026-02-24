@@ -1,12 +1,14 @@
 import Favicon from "react-favicon";
 import webicon from "/exedra-calc-icon.png";
-import { useEffect, useId, useState } from "react";
+import React, { useEffect, useId, useState } from "react";
 
 import DrawIcon from "~/components/icon";
 
 import baseAtkIcon from "~/assets/apps/exedra-calc/icon/sword.svg";
 import statModifierIcon from "~/assets/apps/exedra-calc/icon/sparkles.svg";
+import configIcon from "~/assets/apps/exedra-calc/icon/config.svg";
 
+const MAX_RANDOM = 2 ** 64
 
 const modifierStringMap = new Map([
     ["ATK Up (%)", 0],
@@ -14,14 +16,17 @@ const modifierStringMap = new Map([
     ["ATK Up (flat)", 2],
     ["ATK Down (flat)", 3],
     ["[Enemy] DEF Up (%)", 4],
-    ["Crit DMG Up (%)", 5],
-    ["Crit DMG Down (%)", 6],
-    ["DMG Dealt Up (%)", 7],
-    ["DMG Dealt Down (%)", 8],
-    ["Element Advantage DMG Up (%)", 9],
-    ["Element Advantage DMG Down (%)", 10],
-    ["[Enemy] DMG Taken Up (%)", 11],
-    ["[Enemy] DMG Taken Down (%)", 12],
+    ["[Enemy] DEF Down (%)", 5],
+    ["Crit DMG Up (%)", 6],
+    ["Crit DMG Down (%)", 7],
+    ["DMG Dealt Up (%)", 8],
+    ["DMG Dealt Down (%)", 9],
+    ["Element Advantage DMG Up (%)", 10],
+    ["Element Advantage DMG Down (%)", 11],
+    ["[Enemy] DMG Taken Up (%)", 12],
+    ["[Enemy] DMG Taken Down (%)", 13],
+    ["[Enemy] Element RES Up (%)", 14],
+    ["[Enemy] Element RES Down (%)", 15],
 ])
 
 const modifierString = [
@@ -30,6 +35,7 @@ const modifierString = [
     "ATK Up (flat)",
     "ATK Down (flat)",
     "[Enemy] DEF Up (%)",
+    "[Enemy] DEF Down (%)",
     "Crit DMG Up (%)",
     "Crit DMG Down (%)",
     "DMG Dealt Up (%)",
@@ -38,6 +44,27 @@ const modifierString = [
     "Element Advantage DMG Down (%)",
     "[Enemy] DMG Taken Up (%)",
     "[Enemy] DMG Taken Down (%)",
+    "[Enemy] Element RES Up (%)",
+    "[Enemy] Element RES Down (%)",
+]
+
+const modifierUnit = [
+    "%",
+    "%",
+    "",
+    "",
+    "%",
+    "%",
+    "%",
+    "%",
+    "%",
+    "%",
+    "%",
+    "%",
+    "%",
+    "%",
+    "%",
+    "%",
 ]
 
 interface statModifierInterface {
@@ -46,6 +73,10 @@ interface statModifierInterface {
     type  : number,
     value : number,
 };
+
+function getRandomId() {
+    return String(Math.floor(Math.random() * MAX_RANDOM));
+}
 
 function Header() {
     return (
@@ -57,31 +88,251 @@ function Header() {
     );
 }
 
-function BaseAttackComponent({baseAtk, setBaseAtk} : {baseAtk : number, setBaseAtk : React.Dispatch<React.SetStateAction<number>>}) {
+function BaseStatsComponent(
+    {
+        baseAtk, 
+        setBaseAtk,
+
+        baseDef,
+        setBaseDef,
+    } : {
+        baseAtk : number, 
+        setBaseAtk : React.Dispatch<React.SetStateAction<number>>,
+
+        baseDef : number, 
+        setBaseDef : React.Dispatch<React.SetStateAction<number>>,
+    }
+    ) {
     const baseAtkId = useId();
+    const baseDefId = useId();
     
     return (
-        <section className = "section">
+        <section className = "section" aria-label = "Base Stats Section">
             <div className = "section-title">
                 <DrawIcon source = {baseAtkIcon} className = "section-icon"/>
                 <h1>Base ATK</h1>
                 <DrawIcon source = {baseAtkIcon} className = "section-icon"/>
             </div>
             <hr />
-            <div className = "grid grid-cols-1 md:grid-cols-2 gap-3 justify-center items-center section-content">
-                <label className = "text-center md:text-right" htmlFor = {baseAtkId}>
-                    Base ATK:
+            <div className = "flex flex-row justify-center gap-2 text-center section-content">
+                <label className = "text-center" htmlFor = {baseAtkId}>
+                    Base ATK
                 </label>
                 <input
-                    className = "text-center md:text-left border-black border rounded-lg px-2"
+                    className = "text-center border-black border rounded-lg px-2"
                     id = {baseAtkId}
                     type = "number"
                     value = {baseAtk}
                     autoComplete = "off"
+                    aria-required = "true"
+                    aria-label = "Base Attack value"
                     onChange = {(event) => {
                         setBaseAtk(parseInt(event.target.value, 10));
+                        // console.log(event.target.value);
                     }}
                 />
+            </div>
+            <div className = "flex flex-row justify-center gap-2 text-center section-content">
+                <label className = "text-center" htmlFor = {baseAtkId}>
+                    Base Enemy DEF
+                </label>
+                <input
+                    className = "text-center border-black border rounded-lg px-2"
+                    id = {baseDefId}
+                    type = "number"
+                    value = {baseDef}
+                    autoComplete = "off"
+                    aria-required = "true"
+                    aria-label = "Base Attack value"
+                    onChange = {(event) => {
+                        setBaseDef(parseInt(event.target.value, 10));
+                        // console.log(event.target.value);
+                    }}
+                />
+            </div>
+        </section>
+    )
+}
+
+function ConfigComponent(
+    {
+        multiplier, 
+        setMultiplier, 
+
+        elementalAdvantage, 
+        setElementalAdvantage, 
+
+        isCriticalHit, 
+        setIsCriticalHit, 
+
+        criticalHit, 
+        setCriticalHit, 
+
+        isBroken, 
+        setIsBroken,
+
+        breakAmount,
+        setBreakAmount,
+    } :
+    {
+        multiplier : number, 
+        setMultiplier : React.Dispatch<React.SetStateAction<number>>,
+
+        elementalAdvantage : boolean,
+        setElementalAdvantage : React.Dispatch<React.SetStateAction<boolean>>,
+
+        isCriticalHit : boolean, 
+        setIsCriticalHit : React.Dispatch<React.SetStateAction<boolean>>, 
+
+        criticalHit : number, 
+        setCriticalHit : React.Dispatch<React.SetStateAction<number>>, 
+
+        isBroken : boolean, 
+        setIsBroken : React.Dispatch<React.SetStateAction<boolean>>,
+
+        breakAmount : number,
+        setBreakAmount : React.Dispatch<React.SetStateAction<number>>,
+    }
+) {
+    const multiplierId = useId();
+    const elementalAdvantageId = useId();
+    const isCriticalHitId = useId();
+    const criticalHitId = useId();
+    const isBrokenId = useId();
+    const breakAmountId = useId();
+
+    return (
+        <section className = "section" aria-label = "Configuration Section">
+            <div className = "section-title">
+                <DrawIcon source = {configIcon} className = "section-icon"/>
+                <h1>Configuration</h1>
+                <DrawIcon source = {configIcon} className = "section-icon"/>
+            </div>
+            <hr />
+            <div className = "flex flex-col section-content">
+                <div className = "flex flex-col lg:flex-row justify-center gap-2 text-center">
+                    <label
+                        className = "text-center"
+                        htmlFor = {multiplierId}
+                    >
+                        Ability Multiplier
+                    </label>
+                    <input
+                        className = "text-center border-black border rounded-lg px-2"
+                        id = {multiplierId}
+                        value = {multiplier}
+                        type = "number"
+                        min = {0}
+                        autoComplete = "off"
+                        aria-required = "true"
+                        aria-label = "Ability multiplier"
+                        onChange = {(event) => {
+                            setMultiplier(Math.max(parseFloat(event.target.value), 0));
+                        }}
+                    />
+                    <span className = "text-center lg:text-left">%</span>
+                </div>
+                <div className = "grid grid-cols-2 pt-5 gap-5 justify-items-center lg:justify-items-stretch justify-center">
+                    <label
+                        className = "text-center lg:text-right"
+                        htmlFor = {elementalAdvantageId}
+                    >
+                        Is the attacking unit has the elemental advantage?
+                    </label>
+                    <input
+                        className = "border-black w-5 border rounded-lg px-2"
+                        id = {elementalAdvantageId}
+                        checked = {elementalAdvantage}
+                        type = "checkbox"
+                        aria-label = "Elemental Advantage"
+                        onChange = {(event) => {
+                            // console.log(event.target.checked)
+                            setElementalAdvantage(event.target.checked);
+                        }}
+                    />
+                    <label
+                        className = "text-center lg:text-right"
+                        htmlFor = {isCriticalHitId}
+                    >
+                        Is this a critical hit?
+                    </label>
+                    <input
+                        className = "border-black w-5 border rounded-lg px-2"
+                        id = {isCriticalHitId}
+                        checked = {isCriticalHit}
+                        type = "checkbox"
+                        aria-label = "Critical Hit"
+                        onChange = {(event) => {
+                            // console.log(event.target.checked)
+                            setIsCriticalHit(event.target.checked);
+                        }}
+                    />
+                    <label
+                        className = "text-center lg:text-right"
+                        htmlFor = {isBrokenId}
+                    >
+                        Is the enemy broken?
+                    </label>
+                    <input
+                        className = "border-black w-5 border rounded-lg px-2"
+                        id = {isBrokenId}
+                        checked = {isBroken}
+                        type = "checkbox"
+                        aria-label = "Critical Hit"
+                        onChange = {(event) => {
+                            // console.log(event.target.checked)
+                            setIsBroken(event.target.checked);
+                        }}
+                    />
+                </div>
+                {(isCriticalHit)? (
+                    <div className = "flex flex-col lg:flex-row justify-center gap-2 text-center pt-5">
+                        <label
+                            className = "text-center"
+                            htmlFor = {criticalHitId}
+                        >
+                            Critical Damage
+                        </label>
+                        <input
+                            className = "text-center border-black border rounded-lg px-2"
+                            id = {criticalHitId}
+                            value = {criticalHit}
+                            type = "number"
+                            min = {0}
+                            autoComplete = "off"
+                            aria-required = "true"
+                            aria-label = "Critical Hit amount"
+                            onChange = {(event) => {
+                                setCriticalHit(Math.max(parseFloat(event.target.value), 0));
+                            }}
+                        />
+                        <span className = "text-center lg:text-left">%</span>
+                    </div>
+                ) : <></>}
+                {(isBroken)? (
+                    <div className = "flex flex-col lg:flex-row justify-center gap-2 text-center pt-5">
+                        <label
+                            className = "text-center"
+                            htmlFor = {breakAmountId}
+                        >
+                            Break Amount
+                        </label>
+                        <input
+                            className = "text-center border-black border rounded-lg px-2"
+                            id = {breakAmountId}
+                            value = {breakAmount}
+                            type = "number"
+                            min = {0}
+                            autoComplete = "off"
+                            aria-required = "true"
+                            aria-label = "Break amount"
+                            onChange = {(event) => {
+                                setBreakAmount(Math.max(parseFloat(event.target.value), 0));
+                            }}
+                        />
+                        <span className = "text-center lg:text-left">%</span>
+                    </div>
+                ) : <></>}
             </div>
         </section>
     )
@@ -90,20 +341,22 @@ function BaseAttackComponent({baseAtk, setBaseAtk} : {baseAtk : number, setBaseA
 function StatModifierComponent({modifier, setModifier} : {modifier : statModifierInterface[], setModifier : React.Dispatch<React.SetStateAction<statModifierInterface[]>>}) {
     const sourceId = useId();
     const typeId   = useId();
+    const valueId  = useId();
 
     const [newSource, setNewSource] = useState("");
     const [newType  , setNewType  ] = useState(0);
     const [newTypeString, setNewTypeString] = useState(modifierString[0]);
+    const [newValue , setNewValue] = useState(0);
     
     return (
-        <section className = "section">
+        <section className = "section" aria-label = "Stat Modifier Section">
             <div className = "section-title">
                 <DrawIcon source = {statModifierIcon} className = "section-icon"/>
                 <h1>Stat Modifier</h1>
                 <DrawIcon source = {statModifierIcon} className = "section-icon"/>
             </div>
             <hr />
-            <div className = "flex flex-col md:flex-row items-center justify-center gap-2 section-content text-sm md:text-base">
+            <section className = "flex flex-col lg:flex-row items-center justify-center gap-2 section-content text-sm md:text-base" aria-label = "Section to add your own stat modifier.">
                 <div className = "flex flex-col gap-2 text-center">
                     <label
                         htmlFor = {sourceId}
@@ -116,6 +369,8 @@ function StatModifierComponent({modifier, setModifier} : {modifier : statModifie
                         type = "text"
                         value = {newSource}
                         autoComplete = "off"
+                        aria-autocomplete = "none"
+                        aria-required = "true"
                         onChange = {(event) => {
                             setNewSource(event.target.value);
                         }}
@@ -146,7 +401,70 @@ function StatModifierComponent({modifier, setModifier} : {modifier : statModifie
                         }
                     </select>
                 </div>
-            </div>
+                <div className = "flex flex-col gap-2 text-center">
+                    <label
+                        htmlFor = {valueId}
+                    >
+                        Value
+                    </label>
+                    <input
+                        className = "text-center border-black border rounded-lg px-2"
+                        id = {valueId}
+                        type = "number"
+                        value = {newValue}
+                        autoComplete = "off"
+                        min = {0}
+                        onChange = {(event) => {
+                            setNewValue(Math.max(parseFloat(event.target.value), 0));
+                        }}
+                    />
+                </div>
+                <div className = "flex flex-col gap-2 text-center">
+                    <button
+                        className = "section-button"
+                        onClick = {() => {
+                            function isIdExist(id : string) {
+                                for (const obj of modifier){
+                                    if (id == obj.id) return true;
+                                }
+                                return false;
+                            }
+
+                            var id = getRandomId();
+                            while (isIdExist(id)) {
+                                id = getRandomId();
+                            }
+
+                            const modifierId = id;
+                            // console.log(modifierId);
+                            // console.log(newSource);
+                            // console.log(newType);
+                            // console.log(newValue);
+                            setModifier(
+                                [
+                                    ...modifier,
+                                    {
+                                        id : modifierId,
+                                        source : newSource,
+                                        type : newType,
+                                        value : newValue
+                                    }
+                                ]
+                            )
+                            setNewSource("");
+                            setNewType(0);
+                            setNewTypeString(modifierString[0]);
+                            setNewValue(0);
+                        }}
+                        disabled = {
+                            (newSource === "")? true : false
+                        }
+                        type = "submit"
+                    >
+                        Add
+                    </button>
+                </div>
+            </section>
             <table className = "section-content text-sm md:text-base table-fixed border-3 border-trans-pink border-solid">
                 <thead>
                     <tr className = "border-solid border">
@@ -157,34 +475,24 @@ function StatModifierComponent({modifier, setModifier} : {modifier : statModifie
                     </tr>
                 </thead>
                 <tbody>
-                    <tr key = "a" className = "text-center transition ease-in-out duration-100 bg-cyan-50 hover:bg-cyan-100">
-                        <td>Koharu's Wrath</td>
-                        <td>{modifierString[0]}</td>
-                        <td>{999}</td>
-                        <td>
-                            <button
-                                className = "cursor-pointer border-2 border-black bg-gray-100 hover:bg-gray-50 active:bg-trans-pink m-1 py-1 px-5"
-                                type = "button"
-                            >
-                                Delete
-                            </button>
-                        </td>
-                    </tr>
                     {
                         modifier.map((m : statModifierInterface) => {
                             return (
-                                <tr key = {m.id} className = "text-center transition ease-in-out duration-100 bg-cyan-50 hover:bg-cyan-100">
+                                <tr 
+                                    key = {m.id} 
+                                    className = "text-center transition ease-in-out duration-100 bg-cyan-50 hover:bg-cyan-100"
+                                >
                                     <td>{m.source}</td>
                                     <td>{modifierString[m.type]}</td>
-                                    <td>{m.value.toString()}</td>
+                                    <td>{m.value.toString() + modifierUnit[m.type]}</td>
                                     <td>
                                         <button
-                                            className = "cursor-pointer border-2 border-black bg-gray-100 hover:bg-gray-50 active:bg-trans-pink m-1 py-1 px-5"
+                                            className = "section-button"
                                             type = "button"
                                             onClick = {() => {
                                                 setModifier(
                                                     modifier.filter(a => a.id !== m.id)
-                                                )
+                                                );
                                             }}
                                         >
                                             Delete
@@ -201,19 +509,246 @@ function StatModifierComponent({modifier, setModifier} : {modifier : statModifie
     );
 }
 
+function Calculator(
+    {
+        baseAtk,
+        baseDef,
+        multiplier,
+        elementalAdvantage,
+        isCriticalHit,
+        criticalHit,
+        isBroken,
+        breakAmount,
+        modifier,
+    } : {
+        baseAtk : number,
+        baseDef : number,
+        multiplier : number,
+        elementalAdvantage : boolean,
+        isCriticalHit : boolean,
+        criticalHit : number,
+        isBroken : boolean,
+        breakAmount : number,
+        modifier : statModifierInterface[],
+    }
+) {
+    const [finalDamage, setFinalDamage] = useState(0);
+    const [showDetailed, setShowDetailed] = useState(false);
+
+    const calculateDamage = () => {
+        // Deriving Stats:
+        let atkUp = 0;
+        let atkDown = 0;
+        let atkUpFlat = 0;
+        let atkDownFlat = 0;
+
+        let enemyDefUp = 0;
+        let enemyDefDown = 0;
+        
+        let critDmgUp = 0;
+        let critDmgDown = 0;
+
+        let dmgDealtUp = 0;
+        let dmgDealtDown = 0;
+
+        let elementalDmgUp = 0;
+        let elementalDmgDown = 0;
+
+        let enemyDmgTakenUp = 0;
+        let enemyDmgTakenDown = 0;
+
+        let enemyElementResUp = 0;
+        let enemyElementResDown = 0;
+
+        for (var m of modifier) {
+            switch (m.type) {
+                case 0:
+                    atkUp += m.value;
+                    break;
+                case 1:
+                    atkDown += m.value;
+                    break;
+                case 2:
+                    atkUpFlat += m.value;
+                    break;
+                case 3:
+                    atkDownFlat += m.value;
+                    break;
+                case 4:
+                    enemyDefUp += m.value;
+                    break;
+                case 5:
+                    enemyDefDown += m.value;
+                    break;
+                case 6:
+                    critDmgUp += m.value;
+                    break;
+                case 7:
+                    critDmgDown += m.value;
+                    break;
+                case 8:
+                    dmgDealtUp += m.value;
+                    break;
+                case 9:
+                    dmgDealtDown += m.value;
+                    break;
+                case 10:
+                    elementalDmgUp += m.value;
+                    break;
+                case 11:
+                    elementalDmgDown += m.value;
+                    break;
+                case 12:
+                    enemyDmgTakenUp += m.value;
+                    break;
+                case 13:
+                    enemyDmgTakenDown += m.value;
+                    break;
+                case 14:
+                    enemyElementResUp += m.value;
+                    break;
+                case 15:
+                    enemyElementResDown += m.value;
+                    break;
+            }
+        }
+
+        let totalAtk = baseAtk * (1 + (atkUp / 100)) * (1 - (atkDown / 100)) + atkUpFlat - atkDownFlat;
+        let totalDef = baseDef * (1 + (enemyDefUp / 100)) * (1 - (enemyDefDown / 100));
+        let totalCritMultiplier = (criticalHit + critDmgUp - critDmgDown) / 100;
+        let totalDmgDealt = (1 + (dmgDealtUp / 100)) * (1 - (dmgDealtDown / 100)) - 1;
+        let totalElementalDmgDealt = (elementalDmgUp - elementalDmgDown) / 100;
+        let totalEnemyDmgTaken = (1 + (enemyDmgTakenUp / 100)) * (1 - (enemyDmgTakenDown / 100)) - 1;
+        let totalEnemyElementRes = (enemyElementResUp - enemyElementResDown) / 100;
+
+        let abilityDamageBase = (multiplier / 100) * baseAtk * ((baseAtk / 124) ** 1.2 + 12) / 20;
+        let defenseFactor = Math.min(((totalAtk + 10) / (totalDef + 10)) * 0.12, 2);
+        let criticalFactor = (isCriticalHit)? 1 + totalCritMultiplier : 1;
+        let damageDealtFactor = 1 + totalDmgDealt;
+        let damageTakenFactor = 1 + totalEnemyDmgTaken;
+        let elementalResistanceFactor = 1 - totalEnemyElementRes;
+        let effectiveElementFactor = (elementalAdvantage)? 1.2 + totalElementalDmgDealt : 1;
+        let breakFactor = (isBroken)? (breakAmount / 100) : 1;
+
+        /*
+        console.log(abilityDamageBase);
+        console.log(defenseFactor);
+        console.log(criticalFactor);
+        console.log(damageDealtFactor);
+        console.log(damageTakenFactor);
+        console.log(elementalResistanceFactor);
+        console.log(effectiveElementFactor);
+        console.log(breakFactor);
+        */
+
+        setFinalDamage(
+            abilityDamageBase 
+            * defenseFactor
+            * criticalFactor
+            * damageDealtFactor
+            * damageTakenFactor
+            * elementalResistanceFactor
+            * effectiveElementFactor
+            * breakFactor
+        );
+    }
+
+    return (
+        <section className = "section" aria-label = "Submit and Calculate Section">
+            <button
+                className = "section-button text-xl border-2 "
+                type = "submit"
+                onClick = {calculateDamage}
+            >
+                Calculate
+            </button>
+            <div className = "flex flex-col text-center">
+                <h3 className = "font-noto-sans text-xl text-black">
+                    Total Damage:
+                </h3>
+                <h1 
+                    className = "cursor-pointer font-damage-number text-4xl md:text-6xl lg:text-8xl font-bold transition duration-100 text-purple-600 hover:text-purple-500 text-shadow-lg"
+                >
+                    {(showDetailed)? finalDamage.toFixed(4) : finalDamage.toFixed(0)}
+                </h1>
+            </div>
+            <button
+                className = "section-button text-xl border-2 "
+                type = "submit"
+                onClick = {() => {
+                    setShowDetailed(!showDetailed);
+                }}
+            >
+                {(showDetailed)? "Hide Extra Digits" : "Show Extra Digits"}
+            </button>
+        </section>
+    );
+}
+
 function Content() { // Calculator
     const [baseAtk, setBaseAtk] = useState(0);
-    const [modifier, setModifier] = useState<statModifierInterface[]>([]); // Object: {id : string, source : string, type : int, value : float}
+    const [baseDef, setBaseDef] = useState(0);
+
+    const [multiplier, setMultiplier] = useState(100.0);
+    const [elementalAdvantage, setElementalAdvantage] = useState(false);
+    const [isCriticalHit, setIsCriticalHit] = useState(false);
+    const [criticalHit, setCriticalHit] = useState(10.0);
+    const [isBroken, setIsBroken] = useState(false);
+    const [breakAmount, setBreakAmount] = useState(100.0);
+
+    const [modifier, setModifier] = useState<statModifierInterface[]>([
+        /**
+            {
+                id : getRandomId(),
+                source : "Koharu's Wrath",
+                type : 0,
+                value : 999,
+            }
+        */
+    ]); // Object: {id : string, source : string, type : int, value : float}
 
     return (
         <div className = "overflow-y-auto">
-            <BaseAttackComponent 
+            <BaseStatsComponent 
                 baseAtk    = {baseAtk} 
                 setBaseAtk = {setBaseAtk} 
+
+                baseDef    = {baseDef}
+                setBaseDef = {setBaseDef}
+            />
+            <ConfigComponent
+                multiplier = {multiplier}
+                setMultiplier = {setMultiplier}
+
+                elementalAdvantage = {elementalAdvantage}
+                setElementalAdvantage = {setElementalAdvantage}
+
+                isCriticalHit = {isCriticalHit}
+                setIsCriticalHit = {setIsCriticalHit}
+
+                criticalHit = {criticalHit}
+                setCriticalHit = {setCriticalHit}
+
+                isBroken = {isBroken}
+                setIsBroken = {setIsBroken}
+
+                breakAmount = {breakAmount}
+                setBreakAmount = {setBreakAmount}
             />
             <StatModifierComponent 
                 modifier    = {modifier}
                 setModifier = {setModifier}
+            />
+            <Calculator 
+                baseAtk = {baseAtk}
+                baseDef = {baseDef}
+                multiplier = {multiplier}
+                elementalAdvantage = {elementalAdvantage}
+                isCriticalHit = {isCriticalHit}
+                criticalHit = {criticalHit}
+                isBroken = {isBroken}
+                breakAmount = {breakAmount}
+                modifier = {modifier}
             />
         </div>
     );

@@ -3,7 +3,7 @@ export default function DrawIcon({source, className} : {source : string, classNa
         <img 
             className = {className}
             src = {source}
-            alt = ""
+            aria-hidden = "true"
         />
     );
 }

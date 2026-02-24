@@ -4,6 +4,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Vibur&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Meow+Script&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Story+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -22,6 +23,9 @@
 	/* Koharu's Diary */
 	--font-koharu-title: "Vibur";
 	--font-koharu-handwriting: "Meow Script";	
+
+	/* Exedra Damage Calculator */
+	--font-damage-number: "Lobster";
 }
 
 @layer components {
@@ -62,6 +66,9 @@
 	}
 	.section-content {
 		@apply font-noto-sans text-xl font-normal
+	}
+	.section-button {
+		@apply cursor-pointer disabled:cursor-not-allowed border-2 border-black bg-gray-100 hover:bg-gray-50 disabled:bg-gray-100 active:bg-trans-pink m-1 py-1 px-5
 	}
 }
 

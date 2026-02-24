@@ -186,12 +186,16 @@ function Seeker() {
                     setSeeker(event.target.value);
                 }}
             />
-            <img 
-                className = {(seekerImageResponse === "")? "hidden" : "h-25"}
-                src = {seekerImageResponse}
-                alt = {seekerImageAlt}
-                aria-hidden = "true"
-            />
+            {
+                (seekerImageResponse === "")? <></> : (
+                    <img 
+                        className = {"h-25"}
+                        src = {seekerImageResponse}
+                        alt = {seekerImageAlt}
+                        aria-hidden = "true"
+                    />
+                )
+            }
             <p 
                 style = {{
                     color : seekerColor
@@ -254,10 +258,10 @@ function ApplicationList() {
         <div className = "grid grid-cols-1 md:grid-cols-2 gap-5 p-5">
             <Application 
                 name = "Magia Exedra's Damage Calculator"
-                desc = "Damage calculator for the mobile / PC gacha game Magia Exedra. (Currently under renovation)"
+                desc = "Damage calculator for the mobile / PC gacha game Magia Exedra. (Seeker code: exedra-calc)"
                 icon = {exedra}
                 iconAlt = "Magia Exedra's Icon"
-                routePath = ""
+                routePath = "exedra-calc"
             />
             <UnavailableApplicaton />
             <UnavailableApplicaton />
