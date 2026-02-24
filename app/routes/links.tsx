@@ -24,42 +24,39 @@ function Contact({text, icon, alt}: {text : string, icon : string, alt : string}
 function Content() {
 	return (
 		<div className = "blog-content">
-            <h3 className = "paragraph-title">
+            <h2 className = "paragraph-title">
                 Contact Information:
-            </h3>
+            </h2>
             <div className = "flex flex-col items-center">
                 <div className = "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 w-fit items-center">
                     <a href = "https://discord.com/users/535335309769179136">
                         <Contact 
                             text = "@adorable_puddle"
                             icon = {discord_ico}
-                            alt  = "discord.svg"
+                            alt  = "Discord Logo"
                         />
                     </a>
                     <a href = "https://github.com/AdorablePuddle">
                         <Contact 
                             text = "AdorablePuddle"
                             icon = {github_ico}
-                            alt  = "github.svg"
+                            alt  = "Github Logo"
                         />
                     </a>
                     <a href = "https://www.youtube.com/@ytamb4ever">
                         <Contact 
                             text = "@ytamb4ever"
                             icon = {youtube_ico}
-                            alt  = "discord.svg"
+                            alt  = "Youtube Logo"
                         />
                     </a>
-                    <Contact 
-                        text = "amberthequeer@gmail.com"
-                        icon = {gmail_ico}
-                        alt  = "gmail.svg"
-                    />
-                    <Contact 
-                        text = "Adorablest-Puddle"
-                        icon = {whatsapp_ico}
-                        alt  = "whatsapp.svg"
-                    />
+                    <a href = "mailto:amberthequeer@gmail.com">
+                        <Contact 
+                            text = "amberthequeer@gmail.com"
+                            icon = {gmail_ico}
+                            alt  = "Gmail Icon"
+                        />
+                    </a>
                 </div>
             </div>
             <h3 className = "paragraph-title">

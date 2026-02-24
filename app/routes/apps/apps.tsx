@@ -37,8 +37,7 @@ function Seeker() {
             navigator("koharu");
         },
         "exedra-calc" : () => {
-            // navigator("exedra-calc");
-            setSeekerResponse("The website you're looking for is no longer available.");
+            navigator("exedra-calc");
         },
         "secret" : () => {
             alert("A secret is revealed!");
@@ -259,14 +258,11 @@ function ApplicationList() {
         <div className = "grid grid-cols-1 md:grid-cols-2 gap-5 p-5">
             <Application 
                 name = "Magia Exedra's Damage Calculator"
-                desc = "Damage calculator for the mobile / PC gacha game Magia Exedra. (Unavailable until further notice)"
+                desc = "Damage calculator for the mobile / PC gacha game Magia Exedra. (Seeker code: exedra-calc)"
                 icon = {exedra}
                 iconAlt = "Magia Exedra's Icon"
-                routePath = ""
+                routePath = "exedra-calc"
             />
-            <UnavailableApplicaton />
-            <UnavailableApplicaton />
-            <UnavailableApplicaton />
         </div>
     );
 }

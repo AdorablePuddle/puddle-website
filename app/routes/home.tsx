@@ -22,9 +22,9 @@ function Content() {
 	return (
 		<div className = "blog-content">
 			<img className = "float-right p-5" src = {mizu_smug} alt = "A girl with pink hair, red bow and clear pink eyes, tied into a side ponytail. She displays a smug expression at the viewer."/>
-			<p className = "paragraph">
+			<h2 className = "paragraph">
 				Welcome to Puddle's Website!
-			</p>
+			</h2>
 			<p className = "paragraph">
 				This page is where I keep updates about myself and the projects I do and some other extra stuff.
 			</p>
@@ -40,20 +40,20 @@ function Content() {
 			<h3 className = "paragraph-title">
 				Most Recent Hyperfixations (Please ask me about them):
 			</h3>
-			<ol>
+			<ul className = "list-disc">
 				<li className = "paragraph">
-					- Minecraft
+					Minecraft
 				</li>
 				<li className = "paragraph">
-					- Maimai
+					Maimai
 				</li>
 				<li className = "paragraph">
-					- 100% Orange Juice
+					100% Orange Juice
 				</li>
 				<li className = "paragraph">
-					- Star Detective Pretty Cure
+					Star Detective Pretty Cure
 				</li>
-			</ol>
+			</ul>
 			<YellingAboutBirthday />
 		</div>
 	);

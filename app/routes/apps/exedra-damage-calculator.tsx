@@ -93,17 +93,32 @@ function BaseStatsComponent(
         baseAtk, 
         setBaseAtk,
 
+        portraitAtk,
+        setPortraitAtk,
+
+        supportAtk,
+        setSupportAtk,
+
         baseDef,
         setBaseDef,
     } : {
         baseAtk : number, 
         setBaseAtk : React.Dispatch<React.SetStateAction<number>>,
 
+        portraitAtk : number,
+        setPortraitAtk : React.Dispatch<React.SetStateAction<number>>,
+
+        supportAtk : number,
+        setSupportAtk : React.Dispatch<React.SetStateAction<number>>,
+
         baseDef : number, 
         setBaseDef : React.Dispatch<React.SetStateAction<number>>,
     }
     ) {
     const baseAtkId = useId();
+    const portraitAtkId = useId();
+    const supportAtkId = useId();
+
     const baseDefId = useId();
     
     return (
@@ -114,25 +129,75 @@ function BaseStatsComponent(
                 <DrawIcon source = {baseAtkIcon} className = "section-icon"/>
             </div>
             <hr />
-            <div className = "flex flex-row justify-center gap-2 text-center section-content">
-                <label className = "text-center" htmlFor = {baseAtkId}>
-                    Base ATK
-                </label>
-                <input
-                    className = "text-center border-black border rounded-lg px-2"
-                    id = {baseAtkId}
-                    type = "number"
-                    value = {baseAtk}
-                    autoComplete = "off"
-                    aria-required = "true"
-                    aria-label = "Base Attack value"
-                    onChange = {(event) => {
-                        setBaseAtk(parseInt(event.target.value, 10));
-                        // console.log(event.target.value);
-                    }}
-                />
+            <div className = "flex flex-row justify-center gap-2">
+                <div className = "flex flex-col justify-center gap-2 text-center section-content" 
+                    title = "Unit's Base Attack without any other modifier."
+                    aria-label = "Unit's Base Attack without any other modifier.">
+                    <label className = "text-center" htmlFor = {baseAtkId}>
+                        Base ATK
+                    </label>
+                    <input
+                        className = "text-center border-black border rounded-lg px-2"
+                        id = {baseAtkId}
+                        type = "number"
+                        value = {baseAtk}
+                        autoComplete = "off"
+                        aria-required = "true"
+                        aria-label = "Base Attack value"
+                        min = {0}
+                        onChange = {(event) => {
+                            setBaseAtk(parseInt(event.target.value, 10));
+                            // console.log(event.target.value);
+                        }}
+                    />
+                </div>
+                <div className = "flex flex-col justify-center gap-2 text-center section-content" 
+                title = "Unit's Equipped Portrait's ATK"
+                aria-label = "Unit's Equipped Portrait's ATK">
+                    <label className = "text-center" htmlFor = {portraitAtkId}>
+                        Portrait ATK
+                    </label>
+                    <input
+                        className = "text-center border-black border rounded-lg px-2"
+                        id = {portraitAtkId}
+                        type = "number"
+                        value = {portraitAtk}
+                        autoComplete = "off"
+                        aria-required = "true"
+                        aria-label = "Portrait Attack Value"
+                        min = {0}
+                        onChange = {(event) => {
+                            setPortraitAtk(parseInt(event.target.value, 10));
+                            // console.log(event.target.value);
+                        }}
+                    />
+                </div>
+                <div className = "flex flex-col justify-center gap-2 text-center section-content" 
+                title = "Unit's Support's ATK. Not the Support's full ATK but only the given part of it."
+                aria-label = "Unit's Support's ATK. Not the Support's full ATK but only the given part of it.">
+                    <label className = "text-center" htmlFor = {supportAtkId}>
+                        Support ATK
+                    </label>
+                    <input
+                        className = "text-center border-black border rounded-lg px-2"
+                        id = {supportAtkId}
+                        type = "number"
+                        value = {supportAtk}
+                        autoComplete = "off"
+                        aria-required = "true"
+                        aria-label = "Support Attack Value"
+                        min = {0}
+                        onChange = {(event) => {
+                            setSupportAtk(parseInt(event.target.value, 10));
+                            // console.log(event.target.value);
+                        }}
+                    />
+                </div>
+                
             </div>
-            <div className = "flex flex-row justify-center gap-2 text-center section-content">
+            <div className = "flex flex-row justify-center gap-2 text-center section-content" 
+            title = "Target's Base DEF without any modifier."
+            aria-label = "Target's Base DEF without any modifier.">
                 <label className = "text-center" htmlFor = {baseAtkId}>
                     Base Enemy DEF
                 </label>
@@ -210,7 +275,9 @@ function ConfigComponent(
             </div>
             <hr />
             <div className = "flex flex-col section-content">
-                <div className = "flex flex-col lg:flex-row justify-center gap-2 text-center">
+                <div className = "flex flex-col lg:flex-row justify-center gap-2 text-center"
+                title = "The attack damage multiplier. (For example: 180% Light DMG)"
+                aria-label = "The attack's damage multiplier. (For example: 180% Light DMG)">
                     <label
                         className = "text-center"
                         htmlFor = {multiplierId}
@@ -225,7 +292,6 @@ function ConfigComponent(
                         min = {0}
                         autoComplete = "off"
                         aria-required = "true"
-                        aria-label = "Ability multiplier"
                         onChange = {(event) => {
                             setMultiplier(Math.max(parseFloat(event.target.value), 0));
                         }}
@@ -236,15 +302,18 @@ function ConfigComponent(
                     <label
                         className = "text-center lg:text-right"
                         htmlFor = {elementalAdvantageId}
+                        title = "Dictates whether or not the attacker has elemental advantage over the defender."
+                        aria-label = "Dictates whether or not the attacker has elemental advantage over the defender."
                     >
-                        Is the attacking unit has the elemental advantage?
+                        Elemental Advantage?
                     </label>
                     <input
                         className = "border-black w-5 border rounded-lg px-2"
+                        title = "Dictates whether or not the attacker has elemental advantage over the defender."
+                        aria-label = "Dictates whether or not the attacker has elemental advantage over the defender."
                         id = {elementalAdvantageId}
                         checked = {elementalAdvantage}
                         type = "checkbox"
-                        aria-label = "Elemental Advantage"
                         onChange = {(event) => {
                             // console.log(event.target.checked)
                             setElementalAdvantage(event.target.checked);
@@ -253,15 +322,18 @@ function ConfigComponent(
                     <label
                         className = "text-center lg:text-right"
                         htmlFor = {isCriticalHitId}
+                        title = "Dictates whether or not the attacker had scored a critical hit."
+                        aria-label = "Dictates whether or not the attacker had scored a critical hit."
                     >
-                        Is this a critical hit?
+                        Critical Hit?
                     </label>
                     <input
                         className = "border-black w-5 border rounded-lg px-2"
+                        title = "Dictates whether or not the attacker had scored a critical hit."
+                        aria-label = "Dictates whether or not the attacker had scored a critical hit."
                         id = {isCriticalHitId}
                         checked = {isCriticalHit}
                         type = "checkbox"
-                        aria-label = "Critical Hit"
                         onChange = {(event) => {
                             // console.log(event.target.checked)
                             setIsCriticalHit(event.target.checked);
@@ -270,15 +342,18 @@ function ConfigComponent(
                     <label
                         className = "text-center lg:text-right"
                         htmlFor = {isBrokenId}
+                        title = "Dictates whether the defender is currently broken."
+                        aria-label = "Dictates whether the defender is currently broken."
                     >
-                        Is the enemy broken?
+                        Break?
                     </label>
                     <input
                         className = "border-black w-5 border rounded-lg px-2"
+                        title = "Dictates whether the defender is currently broken."
+                        aria-label = "Dictates whether the defender is currently broken."
                         id = {isBrokenId}
                         checked = {isBroken}
                         type = "checkbox"
-                        aria-label = "Critical Hit"
                         onChange = {(event) => {
                             // console.log(event.target.checked)
                             setIsBroken(event.target.checked);
@@ -286,7 +361,9 @@ function ConfigComponent(
                     />
                 </div>
                 {(isCriticalHit)? (
-                    <div className = "flex flex-col lg:flex-row justify-center gap-2 text-center pt-5">
+                    <div className = "flex flex-col lg:flex-row justify-center gap-2 text-center pt-5"
+                    title = "The percentage of bonus damage the attacker dealt on a critical hit."
+                    aria-label = "The percentage of bonus damage the attacker dealt on a critical hit.">
                         <label
                             className = "text-center"
                             htmlFor = {criticalHitId}
@@ -301,7 +378,6 @@ function ConfigComponent(
                             min = {0}
                             autoComplete = "off"
                             aria-required = "true"
-                            aria-label = "Critical Hit amount"
                             onChange = {(event) => {
                                 setCriticalHit(Math.max(parseFloat(event.target.value), 0));
                             }}
@@ -310,7 +386,9 @@ function ConfigComponent(
                     </div>
                 ) : <></>}
                 {(isBroken)? (
-                    <div className = "flex flex-col lg:flex-row justify-center gap-2 text-center pt-5">
+                    <div className = "flex flex-col lg:flex-row justify-center gap-2 text-center pt-5"
+                    title = "The break percentage of the defender."
+                    aria-label = "The break percentage of the defender.">
                         <label
                             className = "text-center"
                             htmlFor = {breakAmountId}
@@ -325,7 +403,6 @@ function ConfigComponent(
                             min = {0}
                             autoComplete = "off"
                             aria-required = "true"
-                            aria-label = "Break amount"
                             onChange = {(event) => {
                                 setBreakAmount(Math.max(parseFloat(event.target.value), 0));
                             }}
@@ -357,7 +434,9 @@ function StatModifierComponent({modifier, setModifier} : {modifier : statModifie
             </div>
             <hr />
             <section className = "flex flex-col lg:flex-row items-center justify-center gap-2 section-content text-sm md:text-base" aria-label = "Section to add your own stat modifier.">
-                <div className = "flex flex-col gap-2 text-center">
+                <div className = "flex flex-col gap-2 text-center"
+                title = "The source of the buff or debuff."
+                aria-label = "The source of the buff or debuff.">
                     <label
                         htmlFor = {sourceId}
                     >
@@ -376,7 +455,9 @@ function StatModifierComponent({modifier, setModifier} : {modifier : statModifie
                         }}
                     />
                 </div>
-                <div className = "flex flex-col gap-2 text-center">
+                <div className = "flex flex-col gap-2 text-center"
+                title = "The type of the buff or debuff."
+                aria-label = "The type of the buff or debuff.">
                     <label
                         htmlFor = {typeId}
                     >
@@ -401,7 +482,9 @@ function StatModifierComponent({modifier, setModifier} : {modifier : statModifie
                         }
                     </select>
                 </div>
-                <div className = "flex flex-col gap-2 text-center">
+                <div className = "flex flex-col gap-2 text-center"
+                title = "The potency of the buff or debuff."
+                aria-label = "The potency of the buff or debuff.">
                     <label
                         htmlFor = {valueId}
                     >
@@ -422,6 +505,8 @@ function StatModifierComponent({modifier, setModifier} : {modifier : statModifie
                 <div className = "flex flex-col gap-2 text-center">
                     <button
                         className = "section-button"
+                        title = "Add new stats modifier."
+                        aria-label = "Add new stats modifier."
                         onClick = {() => {
                             function isIdExist(id : string) {
                                 for (const obj of modifier){
@@ -503,7 +588,6 @@ function StatModifierComponent({modifier, setModifier} : {modifier : statModifie
                         })
                     }
                 </tbody>
-                
             </table>
         </section>
     );
@@ -512,6 +596,8 @@ function StatModifierComponent({modifier, setModifier} : {modifier : statModifie
 function Calculator(
     {
         baseAtk,
+        portraitAtk,
+        supportAtk,
         baseDef,
         multiplier,
         elementalAdvantage,
@@ -522,6 +608,8 @@ function Calculator(
         modifier,
     } : {
         baseAtk : number,
+        portraitAtk : number,
+        supportAtk : number,
         baseDef : number,
         multiplier : number,
         elementalAdvantage : boolean,
@@ -538,24 +626,24 @@ function Calculator(
     const calculateDamage = () => {
         // Deriving Stats:
         let atkUp = 0;
-        let atkDown = 0;
+        let atkDown = 1;
         let atkUpFlat = 0;
         let atkDownFlat = 0;
 
         let enemyDefUp = 0;
-        let enemyDefDown = 0;
+        let enemyDefDown = 1;
         
         let critDmgUp = 0;
         let critDmgDown = 0;
 
         let dmgDealtUp = 0;
-        let dmgDealtDown = 0;
+        let dmgDealtDown = 1;
 
         let elementalDmgUp = 0;
-        let elementalDmgDown = 0;
+        let elementalDmgDown = 1;
 
         let enemyDmgTakenUp = 0;
-        let enemyDmgTakenDown = 0;
+        let enemyDmgTakenDown = 1;
 
         let enemyElementResUp = 0;
         let enemyElementResDown = 0;
@@ -566,7 +654,7 @@ function Calculator(
                     atkUp += m.value;
                     break;
                 case 1:
-                    atkDown += m.value;
+                    atkDown *= (100 - m.value) / 100;
                     break;
                 case 2:
                     atkUpFlat += m.value;
@@ -578,31 +666,31 @@ function Calculator(
                     enemyDefUp += m.value;
                     break;
                 case 5:
-                    enemyDefDown += m.value;
+                    enemyDefDown *= (100 - m.value) / 100;
                     break;
                 case 6:
                     critDmgUp += m.value;
                     break;
                 case 7:
-                    critDmgDown += m.value;
+                    critDmgDown += m.value;;
                     break;
                 case 8:
                     dmgDealtUp += m.value;
                     break;
                 case 9:
-                    dmgDealtDown += m.value;
+                    dmgDealtDown *= (100 - m.value) / 100;
                     break;
                 case 10:
                     elementalDmgUp += m.value;
                     break;
                 case 11:
-                    elementalDmgDown += m.value;
+                    elementalDmgDown *= (100 - m.value) / 100;
                     break;
                 case 12:
                     enemyDmgTakenUp += m.value;
                     break;
                 case 13:
-                    enemyDmgTakenDown += m.value;
+                    enemyDmgTakenDown *= (100 - m.value) / 100;
                     break;
                 case 14:
                     enemyElementResUp += m.value;
@@ -612,6 +700,14 @@ function Calculator(
                     break;
             }
         }
+
+        atkDown = (1 - atkDown) * 100;
+        enemyDefDown = (1 - enemyDefDown) * 100;
+        dmgDealtDown = (1 - dmgDealtDown) * 100;
+        elementalDmgDown = (1 - elementalDmgDown) * 100;
+        enemyDmgTakenDown = (1 - enemyDmgTakenDown) * 100;
+
+        baseAtk += portraitAtk + supportAtk;
 
         let totalAtk = baseAtk * (1 + (atkUp / 100)) * (1 - (atkDown / 100)) + atkUpFlat - atkDownFlat;
         let totalDef = baseDef * (1 + (enemyDefUp / 100)) * (1 - (enemyDefDown / 100));
@@ -656,13 +752,17 @@ function Calculator(
     return (
         <section className = "section" aria-label = "Submit and Calculate Section">
             <button
-                className = "section-button text-xl border-2 "
+                className = "section-button text-xl border-2"
+                title = "Calculate the possible damage dealt to the defender under these specific circumstances. RNG not taken into account."
+                aria-label = "Calculate the possible damage dealt to the defender under these specific circumstances. RNG not taken into account."
                 type = "submit"
                 onClick = {calculateDamage}
             >
-                Calculate
+                Calculate Damage
             </button>
-            <div className = "flex flex-col text-center">
+            <div className = "flex flex-col text-center"
+            title = "Estimated amount of damage to the defender."
+            aria-label = "Estimated amount of damage to the defender.">
                 <h3 className = "font-noto-sans text-xl text-black">
                     Total Damage:
                 </h3>
@@ -673,7 +773,9 @@ function Calculator(
                 </h1>
             </div>
             <button
-                className = "section-button text-xl border-2 "
+                className = "section-button text-xl border-2"
+                title = "Click to switch between rounding to the nearest integer, or rounding to the nearest 4th digit after the decimal."
+                aria-label = "Click to switch between rounding to the nearest integer, or rounding to the nearest 4th digit after the decimal."
                 type = "submit"
                 onClick = {() => {
                     setShowDetailed(!showDetailed);
@@ -687,6 +789,8 @@ function Calculator(
 
 function Content() { // Calculator
     const [baseAtk, setBaseAtk] = useState(0);
+    const [portraitAtk, setPortraitAtk] = useState(0);
+    const [supportAtk, setSupportAtk] = useState(0);
     const [baseDef, setBaseDef] = useState(0);
 
     const [multiplier, setMultiplier] = useState(100.0);
@@ -712,6 +816,12 @@ function Content() { // Calculator
             <BaseStatsComponent 
                 baseAtk    = {baseAtk} 
                 setBaseAtk = {setBaseAtk} 
+
+                portraitAtk = {portraitAtk}
+                setPortraitAtk = {setPortraitAtk}
+
+                supportAtk = {supportAtk}
+                setSupportAtk = {setSupportAtk}
 
                 baseDef    = {baseDef}
                 setBaseDef = {setBaseDef}
@@ -741,6 +851,8 @@ function Content() { // Calculator
             />
             <Calculator 
                 baseAtk = {baseAtk}
+                portraitAtk = {portraitAtk}
+                supportAtk = {supportAtk}
                 baseDef = {baseDef}
                 multiplier = {multiplier}
                 elementalAdvantage = {elementalAdvantage}
