@@ -5,11 +5,11 @@ import Header from "~/pages/header";
 import Router from "~/pages/router";
 
 import webicon from "/icon.png";
+import amby_pfp from "~/assets/amby-avatar.png";
 
 import discord_ico  from "~/assets/links/discord.svg";
 import github_ico   from "~/assets/links/github.svg";
 import gmail_ico    from "~/assets/links/gmail.svg";
-import whatsapp_ico from "~/assets/links/whatsapp.svg";
 import youtube_ico  from "~/assets/links/youtube.svg";
 
 function Contact({text, icon, alt}: {text : string, icon : string, alt : string}) {
@@ -82,6 +82,9 @@ export default function Links() {
     return (
         <div className = "flex flex-col w-full h-dvh">
             <Favicon url = {webicon} />
+			<meta property = "og:title" content = "Puddle's Website: Extra Links"/>
+			<meta property = "og:description" content = "Other ways to contact me."/>
+			<meta property = "og:image" content = {amby_pfp}/>
             <Header />
             <Router />
 			<Content />

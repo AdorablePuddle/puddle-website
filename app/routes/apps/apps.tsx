@@ -7,6 +7,7 @@ import Header from "~/pages/header";
 import Router from "~/pages/router";
 
 import webicon from "/icon.png";
+import amby_pfp from "~/assets/amby-avatar.png";
 import takao from "~/assets/takao.png";
 import poppo from "~/assets/poppo.jpeg";
 
@@ -287,6 +288,9 @@ export default function Apps() {
     return (
         <div className = "flex flex-col w-full h-dvh">
             <Favicon url = {webicon} />
+			<meta property = "og:title" content = "Puddle's Website: Apps"/>
+			<meta property = "og:description" content = "Other web applications that I made."/>
+			<meta property = "og:image" content = {amby_pfp}/>
             <Header />
             <Router />
 			<Content />

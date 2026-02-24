@@ -100,6 +100,9 @@ export default function About() {
     return (
         <div className = "flex flex-col w-full h-dvh">
             <Favicon url = {webicon} />
+			<meta property = "og:title" content = "Puddle's Website: About me"/>
+			<meta property = "og:description" content = "A brief (not really) blog about my skills and achievements."/>
+			<meta property = "og:image" content = {amby_pfp}/>
             <Header />
             <Router />
 			<Content />

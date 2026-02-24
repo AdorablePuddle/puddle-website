@@ -5,6 +5,7 @@ import Header from "~/pages/header";
 import Router from "~/pages/router";
 
 import mizu_smug from "~/assets/mizu_smug.png";
+import amby_pfp from "~/assets/amby-avatar.png";
 import webicon from "/icon.png";
 
 function YellingAboutBirthday() {
@@ -69,6 +70,9 @@ export default function Home() {
 	return (
 		<div className = "flex flex-col w-full h-dvh">
             <Favicon url = {webicon} />
+			<meta property = "og:title" content = "Puddle's Website"/>
+			<meta property = "og:description" content = "Website belonging to me!"/>
+			<meta property = "og:image" content = {amby_pfp}/>
 			<Header />
 			<Router />
 			<Content />

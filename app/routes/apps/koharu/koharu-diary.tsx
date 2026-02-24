@@ -3,6 +3,7 @@ import Favicon from "react-favicon";
 
 import koharu_dress from "~/assets/apps/koharu/dress.png"
 import webicon from "/icon.png";
+import kohar_pet from "~/assets/kohar-pet.gif"
 
 let ENTRIES = [
     // 0
@@ -185,6 +186,9 @@ export default function KoharuDiary() {
     return (
         <div className = "flex flex-col">
             <Favicon url = {webicon} />
+			<meta property = "og:title" content = "Koharu's Diary"/>
+			<meta property = "og:description" content = "Diary of a lonely magical girl."/>
+			<meta property = "og:image" content = {kohar_pet}/>
             <Header />
             <Content />
         </div>

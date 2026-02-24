@@ -3,6 +3,7 @@ import webicon from "/exedra-calc-icon.png";
 import React, { useEffect, useId, useState } from "react";
 
 import DrawIcon from "~/components/icon";
+import exedra from "~/assets/apps/exedra.png";
 
 import baseAtkIcon from "~/assets/apps/exedra-calc/icon/sword.svg";
 import statModifierIcon from "~/assets/apps/exedra-calc/icon/sparkles.svg";
@@ -874,6 +875,9 @@ export default function ExedraDamageCalculator() {
     return (
         <div>
             <Favicon url = {webicon} />
+			<meta property = "og:title" content = "Exedra Damage Calculator"/>
+			<meta property = "og:description" content = "Calculate (or estimate) damage dealt by your unit against a target."/>
+			<meta property = "og:image" content = {exedra}/>
             <Header />
             <Content />
         </div>
