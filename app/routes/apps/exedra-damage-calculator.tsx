@@ -130,7 +130,7 @@ function BaseStatsComponent(
                 <DrawIcon source = {baseAtkIcon} className = "section-icon"/>
             </div>
             <hr />
-            <div className = "flex flex-row justify-center gap-2">
+            <div className = "flex flex-col md:flex-row justify-center gap-2">
                 <div className = "flex flex-col justify-center gap-2 text-center section-content" 
                     title = "Unit's Base Attack without any other modifier."
                     aria-label = "Unit's Base Attack without any other modifier.">
