@@ -8,7 +8,7 @@ export default function Rickrolling() {
         document.title = "Secret found!";
         setTimeout(() => {
             window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
-        }, 100)
+        }, 1000)
     })
 
     return (
