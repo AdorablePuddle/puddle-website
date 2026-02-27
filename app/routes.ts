@@ -4,6 +4,7 @@ export default [
 	index(         "routes/home.tsx"),
 	route("about", "routes/about.tsx"),
 	route("links", "routes/links.tsx"),
+	route("secret", "routes/rickrolling.tsx"),
 	// Apps specific stuff
 
 	route("apps" , "routes/apps/layout.tsx", [

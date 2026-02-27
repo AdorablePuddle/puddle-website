@@ -1,7 +1,7 @@
 import { useEffect, useId, useState } from "react";
 import { NavLink, useNavigate } from "react-router";
 
-    import Favicon from "react-favicon";
+import Favicon from "react-favicon";
 
 import Header from "~/pages/header";
 import Router from "~/pages/router";
