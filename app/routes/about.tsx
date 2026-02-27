@@ -83,6 +83,9 @@ function Content() {
             <p className = "paragraph">
                 This is my personal website, created as a mini-documentation on what I do as well as a link to some of my other contact informations. I won't be able to update this website every so often (since it is very likely that I will forget about it at some point, that's just how my memory is). But I'll update it when I can with updated informations and other things. If you want to reach out to me, feel free to do so through one of the options provided in the Extra Links page.
             </p>
+            <p className = "paragraph-hidden">
+                Manually set the path of the website to /secret for a secret :D
+            </p>
 		</article>
 	);
 }
@@ -92,7 +95,7 @@ export default function About() {
         () => {
             document.title = "About Me!";
             if (Math.random() > 0.75) {
-                document.title = "KEY: bweh";
+                document.title = "Highlight the text at the end of the page.";
             }
         }
     )

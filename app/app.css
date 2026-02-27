@@ -17,6 +17,7 @@
 
 	--color-trans-pink: #f5a9b8;
 	--color-trans-blue: #5bcefA;
+	--color-background: #fad1d1;
 
 	--color-paragraph-primary: #190e4f;
 
@@ -31,10 +32,13 @@
 @layer components {
 	/* Main Page */
 	.blog-content {
-		@apply overflow-y-auto w-full h-full p-2 border-5 border-double border-[#b33c86] bg-[#fad1d1];
+		@apply overflow-y-auto w-full h-full p-2 border-5 border-double border-[#b33c86] bg-background;
 	}
 	.paragraph {
 		@apply py-2 text-paragraph-primary indent-16 font-noto-sans text-lg;
+	}
+	.paragraph-hidden {
+		@apply py-2 text-background indent-16 font-noto-sans text-sm;
 	}
 	.caption {
 		@apply py-2 text-paragraph-primary text-center font-noto-sans text-sm;
