@@ -708,9 +708,9 @@ function Calculator(
         elementalDmgDown = (1 - elementalDmgDown) * 100;
         enemyDmgTakenDown = (1 - enemyDmgTakenDown) * 100;
 
-        baseAtk += portraitAtk + supportAtk;
+        let effectiveAtk = baseAtk + portraitAtk + supportAtk;
 
-        let totalAtk = baseAtk * (1 + (atkUp / 100)) * (1 - (atkDown / 100)) + atkUpFlat - atkDownFlat;
+        let totalAtk = effectiveAtk * (1 + (atkUp / 100)) * (1 - (atkDown / 100)) + atkUpFlat - atkDownFlat;
         let totalDef = baseDef * (1 + (enemyDefUp / 100)) * (1 - (enemyDefDown / 100));
         let totalCritMultiplier = (criticalHit + critDmgUp - critDmgDown) / 100;
         let totalDmgDealt = (1 + (dmgDealtUp / 100)) * (1 - (dmgDealtDown / 100)) - 1;
@@ -718,7 +718,7 @@ function Calculator(
         let totalEnemyDmgTaken = (1 + (enemyDmgTakenUp / 100)) * (1 - (enemyDmgTakenDown / 100)) - 1;
         let totalEnemyElementRes = (enemyElementResUp - enemyElementResDown) / 100;
 
-        let abilityDamageBase = (multiplier / 100) * baseAtk * ((baseAtk / 124) ** 1.2 + 12) / 20;
+        let abilityDamageBase = (multiplier / 100) * effectiveAtk * ((effectiveAtk / 124) ** 1.2 + 12) / 20;
         let defenseFactor = Math.min(((totalAtk + 10) / (totalDef + 10)) * 0.12, 2);
         let criticalFactor = (isCriticalHit)? 1 + totalCritMultiplier : 1;
         let damageDealtFactor = 1 + totalDmgDealt;
