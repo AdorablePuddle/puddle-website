@@ -147,6 +147,34 @@ let ENTRIES = [
             </p>
         </div>
     ),
+    // ???
+    (
+        <div className = "diary-entry">
+            <p>
+                In the grand scheme of her life, it was only two weeks.
+            </p>
+            <p>
+                She miss that warmth. For the first time, someone sees her amidst the dense crowd.
+            </p>
+            <p>
+                She miss that silence. For the first time, someone got her back and hold her tight.
+            </p>
+            <p>
+                It was only two weeks. But you don't tend to understand the significance of something until it was gone.
+            </p>
+            <p>
+                An apology never given. A story never resolved. Sun and moon, night and day. Two parts of one yet forever apart.
+            </p>
+        </div>
+    ),
+    // ???
+    (
+        <div className = "diary-entry">
+            <p>
+                I miss you.
+            </p>
+        </div>
+    )
 ]
 
 function Header() {
@@ -164,16 +192,27 @@ function DiaryEntry({day} : {day : string}) {
 }
 
 function Content() {
-    return (
-        <div className = "grid grid-cols-1 md:grid-cols-2 gap-1 m-5">
-            <DiaryEntry day = "1"/>
-            <DiaryEntry day = "2"/>
-            <DiaryEntry day = "4"/>
-            <DiaryEntry day = "6"/>
-            <DiaryEntry day = "7"/>
-            <DiaryEntry day = "8"/>
-        </div>
-    )
+    return (Math.random() > 0.05)? (
+                    <div className = "grid grid-cols-1 md:grid-cols-2 gap-1 m-5">
+                        <DiaryEntry day = "1"/>
+                        <DiaryEntry day = "2"/>
+                        <DiaryEntry day = "4"/>
+                        <DiaryEntry day = "6"/>
+                        <DiaryEntry day = "7"/>
+                        <DiaryEntry day = "8"/>
+                    </div>
+                ) : (
+                    <div className = "grid grid-cols-1 md:grid-cols-2 gap-1 m-5">
+                        <DiaryEntry day = "1"/>
+                        <DiaryEntry day = "2"/>
+                        <DiaryEntry day = "4"/>
+                        <DiaryEntry day = "6"/>
+                        <DiaryEntry day = "7"/>
+                        <DiaryEntry day = "8"/>
+                        <DiaryEntry day = "9"/>
+                        <DiaryEntry day = "10"/>
+                    </div>
+                )
 }
 
 export default function KoharuDiary() {
