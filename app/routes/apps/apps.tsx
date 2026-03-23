@@ -153,6 +153,21 @@ function Seeker() {
         "amby" : () => {
             setSeekerResponse("me blowing Clorine Gas into your room");
         },
+        "sun" : () => {
+            setSeekerResponse("Bright, beautiful, hopeful. But a sun is nothing without its counterpart.");
+        },
+        "moon" : () => {
+            setSeekerResponse("Serene, quiet, retrospective. But a moon is nothing without its light.");
+        },
+        "sun and moon" : () => {
+            navigator("koharu");          
+        },
+        "moon and sun" : () => {
+            setSeekerResponse("引き抜くカセット, 押し込むリセット, 迷い込む迷路, 進めどもダルセーニョ");
+        },
+        "wallflower" : () => {
+            navigator("koharu/tears");
+        }
     };
 
     function seekerHandle(event : React.SyntheticEvent<HTMLFormElement>) {

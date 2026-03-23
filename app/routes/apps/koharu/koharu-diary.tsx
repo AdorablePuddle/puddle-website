@@ -151,18 +151,6 @@ let ENTRIES = [
     (
         <div className = "diary-entry">
             <p>
-                In the grand scheme of her life, it was only two weeks.
-            </p>
-            <p>
-                She miss that warmth. For the first time, someone sees her amidst the dense crowd.
-            </p>
-            <p>
-                She miss that silence. For the first time, someone got her back and hold her tight.
-            </p>
-            <p>
-                It was only two weeks. But you don't tend to understand the significance of something until it was gone.
-            </p>
-            <p>
                 An apology never given. A story never resolved. Sun and moon, night and day. Two parts of one yet forever apart.
             </p>
         </div>
