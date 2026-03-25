@@ -112,7 +112,7 @@ function Seeker() {
         "adhd" : () => {
             setSeekerResponse("Absolutely.");
         },
-        "magia" : () => {
+        "synopsis" : () => {
             setSeekerResponse("⋆ ˚｡⋆୨୧˚ Fucking Dysphoria Magic ˚୨୧⋆｡˚ ⋆");
         },
         "literary genius" : () => {
