@@ -5,6 +5,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Meow+Script&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Story+Script&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Funnel+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -27,6 +28,9 @@
 
 	/* Exedra Damage Calculator */
 	--font-damage-number: "Lobster";
+	
+	/* Cinderella */
+	--font-cinderella: "Funnel Sans";
 }
 
 @layer components {
@@ -74,6 +78,9 @@
 	.section-button {
 		@apply cursor-pointer disabled:cursor-not-allowed border-2 border-black bg-gray-100 hover:bg-gray-50 disabled:bg-gray-100 active:bg-trans-pink m-1 py-1 px-5
 	}
+
+	/* Cinderella */
+
 }
 
 html,

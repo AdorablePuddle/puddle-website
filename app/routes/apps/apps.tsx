@@ -37,6 +37,9 @@ function Seeker() {
         "koharu-diary" : () => {
             navigator("koharu");
         },
+        "cinderella" : () => {
+            navigator("cinderella");
+        },
         "exedra-calc" : () => {
             navigator("exedra-calc");
         },

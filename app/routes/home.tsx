@@ -46,7 +46,7 @@ function Content() {
 					Satisfactory
 				</li>
 				<li className = "paragraph">
-					Hollow Knight Silksong
+					Final Fantasy 14
 				</li>
 				<li className = "paragraph">
 					Maimai

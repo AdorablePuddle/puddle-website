@@ -14,5 +14,6 @@ export default [
 			route("tears", "routes/apps/koharu/tears.tsx")
 		]),
 		route("exedra-calc", "routes/apps/exedra-damage-calculator.tsx"),
+		route("cinderella", "routes/apps/cinderella.tsx"),
 	]),
 ] satisfies RouteConfig;
