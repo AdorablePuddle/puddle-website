@@ -47,6 +47,9 @@ export default function Cinderella() {
                             },
                             "miracle" : () => {
                                 window.open("https://docs.google.com/document/d/1YfqCYzLdPEPTtcnYS4TOC-dfta4odOEtS8c35D9rRGo/edit?usp=sharing");
+                            },
+                            "hope" : () => {
+                                window.open("https://docs.google.com/document/d/18XkIaKlAr8dZRn0Ow1ja3iZZ-3Pk_7g7hTQKx039LyE/edit?usp=sharing");
                             }
                         };
                         console.log(password);
