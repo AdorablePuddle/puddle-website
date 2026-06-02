@@ -43,13 +43,10 @@ function Content() {
 			</h3>
 			<ul className = "list-disc">
 				<li className = "paragraph">
-					Satisfactory
-				</li>
-				<li className = "paragraph">
 					Final Fantasy 14
 				</li>
 				<li className = "paragraph">
-					Maimai
+					Art
 				</li>
 			</ul>
 			<YellingAboutBirthday />
