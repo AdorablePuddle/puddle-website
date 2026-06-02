@@ -46,7 +46,10 @@ function Content() {
 					Final Fantasy 14
 				</li>
 				<li className = "paragraph">
-					Art
+					Megaman X
+				</li>
+				<li className = "paragraph">
+					Character Illustration (I want to draw again!)
 				</li>
 			</ul>
 			<YellingAboutBirthday />
