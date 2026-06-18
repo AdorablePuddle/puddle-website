@@ -21,7 +21,7 @@ let ENTRIES = [
                 It has been 1 day since making the wish. My life had changed... or maybe it has not? Everyone acted as if I had been a girl my whole life. Everything feels both so natural and as if I have been transported to a different world altogether.
             </p>
             <p>
-                I used to not having any friends. But today, when I get to school, I was greeted with a few girls I was not familiar with, and they took me with them to lunch. Being included as one of the girls feel nice. Even though I couldn't follow any of their conversations. Girls' talk are so confusing.
+                I used to not having any friends. But today, when I get to school, I was greeted with my childhood friends, and they took me with them to lunch. Being included as one of the girls feel nice. Even though I couldn't follow any of their conversations. Girls' talk are so confusing.
             </p>
             <p>
                 Oh. I met with Kyubey today also. He took me out to do some "witch hunt" as he calls it. It is my duty to fight witches from now on as a magical girl, he said. I don't know what Witches are... maybe I'll ask him when I meet him later.
